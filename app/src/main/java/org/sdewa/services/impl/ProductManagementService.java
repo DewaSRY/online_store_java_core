@@ -1,12 +1,13 @@
 package org.sdewa.services.impl;
 
+import org.sdewa.AppContext.Services;
 import org.sdewa.entities.Product;
 import org.sdewa.services.ProductManagement;
 
 import java.util.Collections;
 import java.util.List;
 
-public class ProductManagementService implements ProductManagement {
+public class ProductManagementService implements ProductManagement, Services {
     private final List<Product> products;
 
 

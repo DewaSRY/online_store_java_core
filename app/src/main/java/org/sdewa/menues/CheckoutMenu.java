@@ -1,14 +1,21 @@
 package org.sdewa.menues;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.services.AuthManagement;
 import org.sdewa.services.OrderManagement;
+import org.sdewa.services.impl.AuthManagementServices;
+import org.sdewa.services.impl.OrderManagementService;
 
 public class CheckoutMenu implements Menu {
 
     private final OrderManagement orderManagement;
     private final AuthManagement authManagement;
 
+    public CheckoutMenu(Context context) {
+        this(context.<OrderManagement>getService(OrderManagementService.class),
+                context.<AuthManagement>getService(AuthManagementServices.class));
+    }
 
     public CheckoutMenu(OrderManagement orderManagement, AuthManagement authManagement) {
         this.orderManagement = orderManagement;

@@ -1,12 +1,14 @@
 package org.sdewa.services.impl;
 
+import org.sdewa.AppContext.Services;
 import org.sdewa.entities.Order;
 import org.sdewa.services.OrderManagement;
 
 import java.util.Collections;
 import java.util.List;
 
-public class OrderManagementService implements OrderManagement {
+
+public class OrderManagementService implements OrderManagement, Services {
     private final List<Order> orders;
 
     public OrderManagementService(List<Order> order) {

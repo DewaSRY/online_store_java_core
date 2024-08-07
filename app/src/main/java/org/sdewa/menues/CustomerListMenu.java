@@ -1,12 +1,18 @@
 package org.sdewa.menues;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.User;
 import org.sdewa.services.UserManagement;
+import org.sdewa.services.impl.UserManagementServices;
 
 public class CustomerListMenu implements Menu {
 
     private final UserManagement userManagement;
+
+    public CustomerListMenu(Context context) {
+        this(context.<UserManagement>getService(UserManagementServices.class));
+    }
 
     public CustomerListMenu(UserManagement userManagement) {
         this.userManagement = userManagement;

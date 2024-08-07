@@ -1,13 +1,18 @@
 package org.sdewa.menues;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.User;
 import org.sdewa.entities.impl.UserDto;
-import org.sdewa.services.AuthManagement;
 import org.sdewa.services.UserManagement;
+import org.sdewa.services.impl.UserManagementServices;
 
 public class SignUpMenu implements Menu {
     private final UserManagement userManagement;
+
+    public SignUpMenu(Context context) {
+        this(context.<UserManagement>getService(UserManagementServices.class));
+    }
 
     public SignUpMenu(UserManagement userManagement) {
         this.userManagement = userManagement;

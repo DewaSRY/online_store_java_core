@@ -1,14 +1,13 @@
 package org.sdewa.services.impl;
 
-import org.sdewa.entities.Order;
+import org.sdewa.AppContext.Services;
 import org.sdewa.entities.User;
 import org.sdewa.services.UserManagement;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class UserManagementServices implements UserManagement {
+public class UserManagementServices implements UserManagement, Services {
     private static final String NOT_UNIQUE_EMAIL_ERROR_MESSAGE = "This email is already used by another user. Please, use another email";
     private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
     private static final String NO_ERROR_MESSAGE = "";

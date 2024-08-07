@@ -2,17 +2,14 @@ package org.sdewa.menues;
 
 import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
-import org.sdewa.services.AuthManagement;
 
 public class SettingMenu implements Menu {
 
 
     private final Context context;
-    private final AuthManagement authManagement;
 
-    public SettingMenu(Context context, AuthManagement authManagement) {
+    public SettingMenu(Context context) {
         this.context = context;
-        this.authManagement = authManagement;
     }
 
     @Override

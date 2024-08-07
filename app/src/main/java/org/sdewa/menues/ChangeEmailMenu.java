@@ -1,12 +1,18 @@
 package org.sdewa.menues;
 
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.services.AuthManagement;
+import org.sdewa.services.impl.AuthManagementServices;
 
 public class ChangeEmailMenu implements Menu {
 
     private final AuthManagement authManagement;
+
+    public ChangeEmailMenu(Context context) {
+        this(context.<AuthManagement>getService(AuthManagementServices.class));
+    }
 
     public ChangeEmailMenu(AuthManagement authManagement) {
         this.authManagement = authManagement;

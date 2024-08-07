@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.sdewa.AppContext.Context;
 
 
+import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.Product;
 import org.sdewa.entities.impl.ProductDto;
 import org.sdewa.menues.*;
@@ -29,40 +30,19 @@ public class Main {
         context.putServices(new UserManagementServices(new ArrayList<>()));
         context.putServices(new ProductManagementService(getInitProduct()));
         context.putServices(new AuthManagementServices());
-        context.putMenu(new AuthMenu(
-                context,
-                context.<AuthManagement>getService(AuthManagementServices.class),
-                context.<UserManagement>getService(UserManagementServices.class)));
-        context.putMenu(new ChangeEmailMenu(
-                context.<AuthManagement>getService(AuthManagementServices.class)));
-        context.putMenu(new ChangePasswordMenu(
-                context.<AuthManagement>getService(AuthManagementServices.class)));
-        context.putMenu(new CheckoutMenu(
-                context.<OrderManagement>getService(OrderManagementService.class),
-                context.<AuthManagement>getService(AuthManagementServices.class)));
-        context.putMenu(new CustomerListMenu(
-                context.<UserManagement>getService(UserManagementServices.class)));
+        context.putMenu(new AuthMenu(context));
+        context.putMenu(new ChangeEmailMenu(context));
+        context.putMenu(new ChangePasswordMenu(context));
+        context.putMenu(new CheckoutMenu(context));
+        context.putMenu(new CustomerListMenu(context));
         context.putMenu(new MainMenu(context));
-        context.putMenu(new MyOrderMenu(
-                context.<AuthManagement>getService(AuthManagementServices.class),
-                context.<OrderManagement>getService(OrderManagementService.class)));
-        context.putMenu(new MyOrderMenu(
-                context.<AuthManagement>getService(AuthManagementServices.class),
-                context.<OrderManagement>getService(OrderManagementService.class)));
-        context.putMenu(new ProductCatalogMenu(
-                context.<ProductManagement>getService(ProductManagementService.class),
-                context.<OrderManagement>getService(OrderManagementService.class),
-                context.<AuthManagement>getService(AuthManagementServices.class)));
-        context.putMenu(new SettingMenu(
-                context,
-                context.<AuthManagement>getService(AuthManagementServices.class)));
-        context.putMenu(new SignInMenu(
-                context.<UserManagement>getService(UserManagementServices.class),
-                context.<AuthManagement>getService(AuthManagementServices.class)));
-        context.putMenu(new SignOutMenu(
-                context.<AuthManagement>getService(AuthManagementServices.class)));
-        context.putMenu(new SignUpMenu(
-                context.<UserManagement>getService(UserManagementServices.class)));
+        context.putMenu(new MyOrderMenu(context));
+        context.putMenu(new MyOrderMenu(context));
+        context.putMenu(new ProductCatalogMenu(context));
+        context.putMenu(new SettingMenu(context));
+        context.putMenu(new SignInMenu(context));
+        context.putMenu(new SignOutMenu(context));
+        context.putMenu(new SignUpMenu(context));
         context.runtMenu(MainMenu.class);
     }
 

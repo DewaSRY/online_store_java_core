@@ -4,16 +4,21 @@ import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.services.AuthManagement;
 import org.sdewa.services.UserManagement;
+import org.sdewa.services.impl.AuthManagementServices;
+import org.sdewa.services.impl.UserManagementServices;
 
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AuthMenu implements Menu {
 
     private final Context context;
     private final AuthManagement authManagement;
     private final UserManagement userManagement;
+
+    public AuthMenu(Context context) {
+        this(context,
+                context.<AuthManagement>getService(AuthManagementServices.class),
+                context.<UserManagement>getService(UserManagementServices.class));
+    }
 
     public AuthMenu(Context context, AuthManagement authManagement, UserManagement userManagement) {
         this.context = context;
