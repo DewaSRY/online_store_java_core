@@ -11,6 +11,13 @@ public class UserDto implements User {
     private String password;
     private String email;
 
+    public UserDto(String firstName, String lastName, String password, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+    }
+
     {
         id = ++userCounter;
     }

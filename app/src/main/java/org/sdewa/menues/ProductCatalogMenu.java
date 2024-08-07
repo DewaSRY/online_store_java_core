@@ -31,7 +31,7 @@ public class ProductCatalogMenu implements Menu {
         var productList = productManagement.getProducts();
         System.out.println("This is lis of our product");
         for (int idx = 0; idx < productList.size(); idx++) {
-            System.out.printf("(%d) %s", idx, productList.get(idx));
+            System.out.printf("(%d) %s%n", idx, productList.get(idx));
         }
     }
 

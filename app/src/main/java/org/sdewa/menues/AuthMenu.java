@@ -29,18 +29,13 @@ public class AuthMenu implements Menu {
                 (1) Sing in menu
                 (2) Sing out menu
                 (b) back""";
+        System.out.println(menuOption);
     }
 
     @Override
     public void run() {
-        String userInput = getUserInput("insert your input ");
-        var scUserInput = new Scanner(userInput);
-        var findUserInput = scUserInput.findAll(Pattern.compile("[\\d]")).findFirst();
-        findUserInput.ifPresent((input) -> {
-            runSelectedMenu(Integer.parseInt(input.group()));
-        });
-
-
+        String userInput = getUserInput("insert your input");
+        runSelectedMenu(getInputIdx(userInput));
     }
 
     private void runSelectedMenu(int inputIdx) {

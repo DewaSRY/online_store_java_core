@@ -14,10 +14,10 @@ public interface Menu {
     void run();
 
     default String getUserInput(String message) {
-        try (var sc = new Scanner(System.in)) {
-            System.out.printf("%s : ", message);
-            return sc.next();
-        }
+        var sc = new Scanner(System.in);
+        System.out.printf("%s : ", message);
+        return sc.next();
+
     }
 
 
@@ -28,5 +28,13 @@ public interface Menu {
             userInputList.add(Integer.parseInt(userInputMatcher.group()));
         }
         return userInputList;
+    }
+
+    default int getInputIdx(String userInput) {
+        Matcher userInputMatcher = numberPattern.matcher(userInput);
+        while (userInputMatcher.find()) {
+            return Integer.parseInt(userInputMatcher.group());
+        }
+        return -1;
     }
 }

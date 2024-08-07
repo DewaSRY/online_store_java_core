@@ -35,8 +35,6 @@ public class MyOrderMenu implements Menu {
             System.out.printf("order with id (%d)%n", idx);
             printOrderList(orderList.get(idx).getProductList());
         }
-
-
     }
 
     private User getUser() {

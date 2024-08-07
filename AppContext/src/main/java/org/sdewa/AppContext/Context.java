@@ -28,7 +28,6 @@ public class Context {
     }
 
     public void putMenu(Menu menu) {
-        System.out.println(menu);
         menuStore.putService(menu, menu);
     }
 

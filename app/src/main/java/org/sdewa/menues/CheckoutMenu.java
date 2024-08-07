@@ -23,6 +23,10 @@ public class CheckoutMenu implements Menu {
     @Override
     public void run() {
         var currentAuthUser = authManagement.getCurrentLoginUser();
+        if (currentAuthUser == null) {
+            System.out.println("your are not login");
+            return;
+        }
         var orderList = orderManagement.getOrderByUserId(currentAuthUser.getId());
         for (int i = 0; i < orderList.size(); i++) {
             System.out.printf("(%d) %s", i, orderList.get(i));
