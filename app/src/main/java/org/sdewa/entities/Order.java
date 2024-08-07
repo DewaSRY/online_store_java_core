@@ -15,4 +15,6 @@ public interface Order {
 
     int getCustomerId();
 
+    List<Product> getProductList();
+
 }

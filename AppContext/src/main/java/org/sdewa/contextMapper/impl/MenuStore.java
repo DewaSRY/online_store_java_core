@@ -15,8 +15,12 @@ public class MenuStore implements ContextMapper {
 
     @Override
     public <T> void putService(Object service, T serviceObject) {
+
         if (serviceObject instanceof Menu object) {
             menuMap.put(getClassName(service), object);
+
+        } else {
+            System.out.println("test");
         }
     }
 
@@ -24,6 +28,7 @@ public class MenuStore implements ContextMapper {
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getService(Object serviceName) {
-        return (T) menuMap.get(serviceName);
+        System.out.println(parseClassName(serviceName));
+        return (T) menuMap.get(parseClassName(serviceName));
     }
 }

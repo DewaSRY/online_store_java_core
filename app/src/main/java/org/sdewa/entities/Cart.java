@@ -7,10 +7,9 @@ public interface Cart {
 
     boolean isEmpty();
 
-    void addProduct();
+    void addProduct(Product productById);
 
-    List<Product> getProduct();
+    List<Product> getProducts();
 
     void clear();
-
 }

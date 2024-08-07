@@ -4,6 +4,7 @@ package org.sdewa.AppContext;
 import org.sdewa.contextMapper.impl.MenuStore;
 import org.sdewa.contextMapper.impl.ServiceStore;
 
+import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.HashMap;
 
 
@@ -22,16 +23,19 @@ public class Context {
         serviceStore.putService(service, service);
     }
 
-    public <T> T getService(T service) {
+    public <T> T getService(Object service) {
         return serviceStore.getService(service);
     }
 
     public void putMenu(Menu menu) {
+        System.out.println(menu);
         menuStore.putService(menu, menu);
     }
 
-    public Menu getMenu(Menu menu) {
-        return menuStore.<Menu>getService(menu);
+    public void runtMenu(Object menu) {
+        var currentMenu = menuStore.<Menu>getService(menu);
+        currentMenu.printMenu();
+        currentMenu.run();
     }
 
     public static Context getInstance() {

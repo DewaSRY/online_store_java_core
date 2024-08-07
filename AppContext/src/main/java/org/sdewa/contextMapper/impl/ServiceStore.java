@@ -22,6 +22,6 @@ public class ServiceStore implements ContextMapper {
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getService(Object service) {
-        return (T) serviceMap.get(getClassName(service));
+        return (T) serviceMap.get(parseClassName(service));
     }
 }

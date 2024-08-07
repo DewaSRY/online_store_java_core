@@ -13,5 +13,4 @@ public interface ProductManagement {
     List<Product> getProducts();
 
     Product getProductById(int ProductId);
-
 }
