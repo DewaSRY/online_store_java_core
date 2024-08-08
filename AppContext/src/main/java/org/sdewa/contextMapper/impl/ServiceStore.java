@@ -1,27 +1,39 @@
 package org.sdewa.contextMapper.impl;
 
+import com.sun.source.tree.BreakTree;
+import org.sdewa.AppContext.Services;
 import org.sdewa.contextMapper.ContextMapper;
 
 import java.util.Map;
+import java.util.Set;
 
-public class ServiceStore implements ContextMapper {
-    private final Map<String, Object> serviceMap;
+public class ServiceStore implements ContextMapper<Services> {
+    private final Map<String, Services> serviceMap;
 
-    public ServiceStore(Map<String, Object> serviceMap) {
+    public ServiceStore(Map<String, Services> serviceMap) {
         this.serviceMap = serviceMap;
     }
 
+
+    public boolean isServiceHaveKey(String serviceName) {
+        return serviceMap.containsKey(serviceName);
+    }
+
     @Override
-    public void putService(Object service, Object serviceObject) {
+    public <T extends Services> void putService(Class<? extends Services> serviceClass, T serviceObject) {
+
         serviceMap.put(
-                getClassName(service),
+                parseClassName(serviceClass),
                 serviceObject
         );
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> T getService(Object service) {
-        return (T) serviceMap.get(parseClassName(service));
+    public Services getService(Class<? extends Services> service) {
+        return serviceMap.get(parseClassName(service));
+    }
+
+    public Services getService(String serviceName) {
+        return serviceMap.get(serviceName);
     }
 }

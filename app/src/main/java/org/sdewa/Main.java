@@ -6,16 +6,10 @@ import java.util.Arrays;
 
 
 import org.sdewa.AppContext.Context;
-
-
-import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.Product;
 import org.sdewa.entities.impl.ProductDto;
 import org.sdewa.menues.*;
-import org.sdewa.services.AuthManagement;
-import org.sdewa.services.OrderManagement;
-import org.sdewa.services.ProductManagement;
-import org.sdewa.services.UserManagement;
+
 import org.sdewa.services.impl.OrderManagementService;
 import org.sdewa.services.impl.UserManagementServices;
 import org.sdewa.services.impl.ProductManagementService;
@@ -30,19 +24,19 @@ public class Main {
         context.putServices(new UserManagementServices(new ArrayList<>()));
         context.putServices(new ProductManagementService(getInitProduct()));
         context.putServices(new AuthManagementServices());
-        context.putMenu(new AuthMenu(context));
-        context.putMenu(new ChangeEmailMenu(context));
-        context.putMenu(new ChangePasswordMenu(context));
-        context.putMenu(new CheckoutMenu(context));
-        context.putMenu(new CustomerListMenu(context));
-        context.putMenu(new MainMenu(context));
-        context.putMenu(new MyOrderMenu(context));
-        context.putMenu(new MyOrderMenu(context));
-        context.putMenu(new ProductCatalogMenu(context));
-        context.putMenu(new SettingMenu(context));
-        context.putMenu(new SignInMenu(context));
-        context.putMenu(new SignOutMenu(context));
-        context.putMenu(new SignUpMenu(context));
+        context.putMenu(AuthMenu.class);
+        context.putMenu(ChangeEmailMenu.class);
+        context.putMenu(ChangePasswordMenu.class);
+        context.putMenu(CheckoutMenu.class);
+        context.putMenu(CustomerListMenu.class);
+        context.putMenu(MainMenu.class);
+        context.putMenu(MyOrderMenu.class);
+        context.putMenu(ProductCatalogMenu.class);
+        context.putMenu(SettingMenu.class);
+        context.putMenu(SignInMenu.class);
+        context.putMenu(SignOutMenu.class);
+        context.putMenu(SignUpMenu.class);
+
         context.runtMenu(MainMenu.class);
     }
 

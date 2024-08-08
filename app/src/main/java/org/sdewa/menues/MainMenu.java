@@ -5,11 +5,8 @@ import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 
 public class MainMenu implements Menu {
-    private final Context context;
+    private Context context;
 
-    public MainMenu(Context context) {
-        this.context = context;
-    }
 
     @Override
     public void printMenu() {

@@ -4,37 +4,18 @@ package org.sdewa.menues;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.Product;
 import org.sdewa.entities.impl.OrderDto;
-import org.sdewa.services.AuthManagement;
-import org.sdewa.services.OrderManagement;
-import org.sdewa.services.ProductManagement;
 import org.sdewa.services.impl.AuthManagementServices;
 import org.sdewa.services.impl.OrderManagementService;
 import org.sdewa.services.impl.ProductManagementService;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ProductCatalogMenu implements Menu {
-    private final ProductManagement productManagement;
-    private final OrderManagement orderManagement;
-    private final AuthManagement authManagement;
-
-    public ProductCatalogMenu(Context context) {
-        this(context.<ProductManagement>getService(ProductManagementService.class),
-                context.<OrderManagement>getService(OrderManagementService.class),
-                context.<AuthManagement>getService(AuthManagementServices.class));
-    }
-
-    public ProductCatalogMenu(ProductManagement productManagement,
-                              OrderManagement orderManagement, AuthManagement authManagement) {
-        this.productManagement = productManagement;
-        this.orderManagement = orderManagement;
-        this.authManagement = authManagement;
-    }
+    private ProductManagementService productManagement;
+    private OrderManagementService orderManagement;
+    private AuthManagementServices authManagement;
 
 
     @Override
@@ -57,7 +38,7 @@ public class ProductCatalogMenu implements Menu {
 
             var userInput = getUserInput("input your order (separate by coma)");
             var orderList = getInputIndexList(userInput);
-            if (orderList.size() == 0) {
+            if (orderList.isEmpty()) {
                 System.out.println("please insert correct input");
                 continue;
             }

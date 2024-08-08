@@ -8,15 +8,8 @@ import org.sdewa.services.impl.UserManagementServices;
 
 public class CustomerListMenu implements Menu {
 
-    private final UserManagement userManagement;
+    private UserManagementServices userManagement;
 
-    public CustomerListMenu(Context context) {
-        this(context.<UserManagement>getService(UserManagementServices.class));
-    }
-
-    public CustomerListMenu(UserManagement userManagement) {
-        this.userManagement = userManagement;
-    }
 
     @Override
     public void printMenu() {

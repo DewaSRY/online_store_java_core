@@ -5,7 +5,7 @@ import org.sdewa.AppContext.Menu;
 
 import java.util.Map;
 
-public class MenuStore implements ContextMapper {
+public class MenuStore implements ContextMapper<Menu> {
 
     private final Map<String, Menu> menuMap;
 
@@ -14,21 +14,14 @@ public class MenuStore implements ContextMapper {
     }
 
     @Override
-    public <T> void putService(Object service, T serviceObject) {
-
-        if (serviceObject instanceof Menu object) {
-            menuMap.put(getClassName(service), object);
-
-        } else {
-            System.out.println("test");
-        }
+    public <T extends Menu> void putService(Class<? extends Menu> menuClass, T menuObject) {
+        menuMap.put(parseClassName(menuClass), menuObject);
     }
-
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> T getService(Object serviceName) {
-        System.out.println(parseClassName(serviceName));
-        return (T) menuMap.get(parseClassName(serviceName));
+    public Menu getService(Class<? extends Menu> serviceClass) {
+        return menuMap.get(parseClassName(serviceClass));
     }
+
+
 }

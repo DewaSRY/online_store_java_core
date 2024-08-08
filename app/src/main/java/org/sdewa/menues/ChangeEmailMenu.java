@@ -5,18 +5,12 @@ import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.services.AuthManagement;
 import org.sdewa.services.impl.AuthManagementServices;
+import org.sdewa.services.impl.OrderManagementService;
 
 public class ChangeEmailMenu implements Menu {
 
-    private final AuthManagement authManagement;
-
-    public ChangeEmailMenu(Context context) {
-        this(context.<AuthManagement>getService(AuthManagementServices.class));
-    }
-
-    public ChangeEmailMenu(AuthManagement authManagement) {
-        this.authManagement = authManagement;
-    }
+    private AuthManagementServices authManagement;
+    
 
     @Override
     public void printMenu() {
@@ -25,7 +19,9 @@ public class ChangeEmailMenu implements Menu {
 
     @Override
     public void run() {
+        System.out.println(authManagement);
         String newEmail = getUserInput("Insert new Email");
+
         var currentUserLogin = authManagement.getCurrentLoginUser();
         if (currentUserLogin != null) {
             currentUserLogin.setEmail(newEmail);

@@ -9,18 +9,9 @@ import org.sdewa.services.impl.OrderManagementService;
 
 public class CheckoutMenu implements Menu {
 
-    private final OrderManagement orderManagement;
-    private final AuthManagement authManagement;
+    private OrderManagementService orderManagement;
+    private AuthManagementServices authManagement;
 
-    public CheckoutMenu(Context context) {
-        this(context.<OrderManagement>getService(OrderManagementService.class),
-                context.<AuthManagement>getService(AuthManagementServices.class));
-    }
-
-    public CheckoutMenu(OrderManagement orderManagement, AuthManagement authManagement) {
-        this.orderManagement = orderManagement;
-        this.authManagement = authManagement;
-    }
 
     @Override
     public void printMenu() {

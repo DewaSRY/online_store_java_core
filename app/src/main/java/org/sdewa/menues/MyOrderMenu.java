@@ -14,18 +14,8 @@ import java.util.List;
 public class MyOrderMenu implements Menu {
 
 
-    private final AuthManagement authManagement;
-    private final OrderManagement orderManagement;
-
-    public MyOrderMenu(Context context) {
-        this(context.<AuthManagement>getService(AuthManagementServices.class),
-                context.<OrderManagement>getService(OrderManagementService.class));
-    }
-
-    public MyOrderMenu(AuthManagement authManagement, OrderManagement orderManagement) {
-        this.authManagement = authManagement;
-        this.orderManagement = orderManagement;
-    }
+    private AuthManagementServices authManagement;
+    private OrderManagementService orderManagement;
 
     @Override
     public void printMenu() {

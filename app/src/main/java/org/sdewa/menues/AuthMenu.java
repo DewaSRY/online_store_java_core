@@ -10,21 +10,20 @@ import org.sdewa.services.impl.UserManagementServices;
 
 public class AuthMenu implements Menu {
 
-    private final Context context;
-    private final AuthManagement authManagement;
-    private final UserManagement userManagement;
+    private Context context;
 
-    public AuthMenu(Context context) {
-        this(context,
-                context.<AuthManagement>getService(AuthManagementServices.class),
-                context.<UserManagement>getService(UserManagementServices.class));
-    }
 
-    public AuthMenu(Context context, AuthManagement authManagement, UserManagement userManagement) {
-        this.context = context;
-        this.authManagement = authManagement;
-        this.userManagement = userManagement;
-    }
+//    public AuthMenu(Context context) {
+//        this(context,
+//                context.<AuthManagement>getService(AuthManagementServices.class),
+//                context.<UserManagement>getService(UserManagementServices.class));
+//    }
+
+//    public AuthMenu(Context context, AuthManagement authManagement, UserManagement userManagement) {
+//        this.context = context;
+//        this.authManagement = authManagement;
+//        this.userManagement = userManagement;
+//    }
 
     @Override
     public void printMenu() {

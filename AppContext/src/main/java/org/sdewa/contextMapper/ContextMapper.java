@@ -1,23 +1,25 @@
 package org.sdewa.contextMapper;
 
+import org.sdewa.AppContext.Services;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public interface ContextMapper {
+public interface ContextMapper<U> {
 
     static Pattern pattern = Pattern.compile("^.*(\\.([A-Za-z])+)$");
 
-    default String getClassName(Object className) {
-        return parseClassName(className.getClass());
-    }
+//    default String getClassName(Object className) {
+//        return parseClassName(className.getClass());
+//    }
 
-    default String parseClassName(Object className) {
+    default String parseClassName(Class<?> className) {
         Matcher getmatcher = pattern.matcher(className.toString());
         boolean b = getmatcher.find();
         return getmatcher.group(1).replace(".", "");
     }
 
-    public <T> void putService(Object service, T serviceObject);
+    public <T extends U> void putService(Class<? extends U> objectName, T object);
 
-    public <T> T getService(Object service);
+    public U getService(Class<? extends U> service);
 }
