@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
+import org.sdewa.AppContext.MenuInteractive;
 import org.sdewa.entities.Product;
 import org.sdewa.entities.impl.OrderDto;
 import org.sdewa.services.impl.AuthManagementServices;
@@ -13,16 +14,16 @@ import org.sdewa.services.impl.OrderManagementService;
 import org.sdewa.services.impl.ProductManagementService;
 
 
-public class ProductCatalogMenu implements Menu {
+public class ProductCatalogMenu implements Menu, MenuInteractive {
     private final ProductManagementService productManagement;
     private final OrderManagementService orderManagement;
     private final AuthManagementServices authManagement;
 
 
     public ProductCatalogMenu(Context context) {
-        this.productManagement = context.getService(ProductManagementService.class);
-        this.orderManagement = context.getService(OrderManagementService.class);
-        this.authManagement = context.getService(AuthManagementServices.class);
+        this.productManagement = context.<ProductManagementService>getService(ProductManagementService.class);
+        this.orderManagement = context.<OrderManagementService>getService(OrderManagementService.class);
+        this.authManagement = context.<AuthManagementServices>getService(AuthManagementServices.class);
     }
 
     @Override
@@ -36,29 +37,29 @@ public class ProductCatalogMenu implements Menu {
     }
 
     @Override
-    public void run() {
-        while (true) {
+    public boolean runSelectedMenu(String userInput) {
+        var orderList = getInputIndexList(userInput);
+        var currentuser = authManagement.getCurrentLoginUser();
 
-            var currentuser = authManagement.getCurrentLoginUser();
-            if (currentuser == null) {
-                break;
-            }
-
-            var userInput = getUserInput("input your order (separate by coma)");
-            var orderList = getInputIndexList(userInput);
-            if (orderList.isEmpty()) {
-                System.out.println("please insert correct input");
-                continue;
-            }
-
-            var ordes = new OrderDto();
-            ordes.setProducts(getPorductList(orderList));
-            ordes.setCustomerId(currentuser.getId());
-            orderManagement.addOrder(ordes);
-            break;
+        if (orderList.isEmpty()) {
+            System.out.println("please insert correct input");
         }
+        var ordes = new OrderDto();
+        ordes.setProducts(getPorductList(orderList));
+        ordes.setCustomerId(currentuser.getId());
+        orderManagement.addOrder(ordes);
+        return false;
+    }
 
+    @Override
+    public boolean runSelectedMenu() {
+        var currentuser = authManagement.getCurrentLoginUser();
 
+        if (currentuser == null) {
+            return false;
+        }
+        var userInput = getUserInput("input your order (separate by coma)");
+        return runSelectedMenu(userInput);
     }
 
 

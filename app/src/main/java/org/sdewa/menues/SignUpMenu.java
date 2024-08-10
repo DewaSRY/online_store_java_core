@@ -2,16 +2,17 @@ package org.sdewa.menues;
 
 import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
+import org.sdewa.AppContext.MenuInteractive;
 import org.sdewa.entities.User;
 import org.sdewa.entities.impl.UserDto;
 import org.sdewa.services.UserManagement;
 import org.sdewa.services.impl.UserManagementServices;
 
-public class SignUpMenu implements Menu {
+public class SignUpMenu implements Menu, MenuInteractive {
     private final UserManagement userManagement;
 
     public SignUpMenu(Context context) {
-        this.userManagement = context.getService(UserManagementServices.class);
+        this.userManagement = context.<UserManagementServices>getService(UserManagementServices.class);
     }
 
     @Override
@@ -20,13 +21,18 @@ public class SignUpMenu implements Menu {
     }
 
     @Override
-    public void run() {
+    public boolean runSelectedMenu(String userInput) {
+        return false;
+    }
+
+    @Override
+    public boolean runSelectedMenu() {
         var user = createUser();
         String registerResponse = userManagement.registerUser(user);
         if (!registerResponse.isEmpty()) {
             System.out.println(registerResponse);
         }
-
+        return false;
     }
 
     private User createUser() {

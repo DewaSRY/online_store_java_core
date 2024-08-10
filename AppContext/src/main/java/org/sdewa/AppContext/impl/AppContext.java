@@ -47,15 +47,27 @@ public class AppContext implements Context {
     @Override
     public void runMenu(Class<? extends Menu> menu) {
         this.menuStore.geObject(menu).ifPresentOrElse(currentMenu -> {
-            System.out.printf("%s%n%s%n%s%n",
-                    "=".repeat(50),
-                    currentMenu.printMenu(),
-                    "=".repeat(50));
-            currentMenu.run();
+            do {
+                this.printStringMenu(currentMenu);
+            } while (currentMenu.runSelectedMenu());
+
+//            while (true) {
+//                if (currentMenu.runSelectedMenu()) {
+//                    break;
+//                } else {
+//                    this.printStringMenu(currentMenu);
+//                }
+//            }
         }, () -> {
             System.out.printf("Menu with name %s not found%n",
                     this.menuStore.parseClassName(menu));
         });
     }
 
+    public void printStringMenu(Menu menu) {
+        System.out.printf("%s%n%s%n%s%n",
+                "=".repeat(50),
+                menu.printMenu(),
+                "=".repeat(50));
+    }
 }

@@ -2,8 +2,8 @@ package org.sdewa.menues;
 
 import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
+import org.sdewa.AppContext.MenuInteractive;
 import org.sdewa.entities.Product;
-import org.sdewa.entities.User;
 import org.sdewa.services.AuthManagement;
 import org.sdewa.services.OrderManagement;
 import org.sdewa.services.impl.AuthManagementServices;
@@ -11,14 +11,14 @@ import org.sdewa.services.impl.OrderManagementService;
 
 import java.util.List;
 
-public class MyOrderMenu implements Menu {
+public class MyOrderMenu implements Menu, MenuInteractive {
 
     private final AuthManagement authManagement;
     private final OrderManagement orderManagement;
 
     public MyOrderMenu(Context context) {
-        this.authManagement = context.getService(AuthManagementServices.class);
-        this.orderManagement = context.getService(OrderManagementService.class);
+        this.authManagement = context.<AuthManagementServices>getService(AuthManagementServices.class);
+        this.orderManagement = context.<OrderManagementService>getService(OrderManagementService.class);
     }
 
     @Override
@@ -27,25 +27,25 @@ public class MyOrderMenu implements Menu {
     }
 
     @Override
-    public void run() {
+    public boolean runSelectedMenu(String userInput) {
+        return false;
+    }
 
-        var currentUser = getUser();
-        if (currentUser == null) return;
+    @Override
+    public boolean runSelectedMenu() {
+        var currentUser = authManagement.getCurrentLoginUser();
+        if (currentUser == null) {
+            System.out.println("please auth first");
+            return false;
+        }
         var orderList = orderManagement.getOrderByUserId(currentUser.getId());
-
         for (int idx = 0; idx < orderList.size(); idx++) {
             System.out.printf("order with id (%d)%n", idx);
             printOrderList(orderList.get(idx).getProductList());
         }
+        return false;
     }
 
-    private User getUser() {
-        var currentUser = authManagement.getCurrentLoginUser();
-        if (currentUser == null) {
-            System.out.println("please auth first");
-        }
-        return currentUser;
-    }
 
     private void printOrderList(List<Product> products) {
         for (int idx = 0; idx < products.size(); idx++) {

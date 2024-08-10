@@ -3,8 +3,11 @@ package org.sdewa.menues;
 import com.sun.source.tree.BreakTree;
 import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
+import org.sdewa.AppContext.MenuInteractive;
 
-public class MainMenu implements Menu {
+import java.sql.Struct;
+
+public class MainMenu implements Menu, MenuInteractive {
     private final Context context;
 
     public MainMenu(Context context) {
@@ -25,50 +28,27 @@ public class MainMenu implements Menu {
     }
 
     @Override
-    public void run() {
-        while (true) {
-            String userInput = getUserInput("Insert your input");
-            if (runSelectedMenu(getInputIdx(userInput))) {
-                break;
-            } else {
-                printMenu();
-            }
+    public boolean runSelectedMenu(String userInput) {
+        try {
+            return switch (Integer.parseInt(userInput)) {
+                case 0 -> selectMenuOption(AuthMenu.class, context);
+                case 1 -> selectMenuOption(CheckoutMenu.class, context);
+                case 2 -> selectMenuOption(CustomerListMenu.class, context);
+                case 3 -> selectMenuOption(MyOrderMenu.class, context);
+                case 4 -> selectMenuOption(ProductCatalogMenu.class, context);
+                case 5 -> selectMenuOption(SettingMenu.class, context);
+                default -> selectMenuOption("by by");
+            };
+        } catch (Exception e) {
+            selectMenuOption("by by");
+            return false;
         }
-
     }
 
-    private boolean runSelectedMenu(int userInput) {
-        boolean isStop = true;
-        switch (userInput) {
-            case 0 -> {
-                context.runMenu(AuthMenu.class);
-                isStop = false;
-            }
-            case 1 -> {
-                context.runMenu(CheckoutMenu.class);
-                isStop = false;
-            }
-            case 2 -> {
-                context.runMenu(CustomerListMenu.class);
-                isStop = false;
-            }
-            case 3 -> {
-                context.runMenu(MyOrderMenu.class);
-                isStop = false;
-            }
-            case 4 -> {
-                context.runMenu(ProductCatalogMenu.class);
-                isStop = false;
-            }
-            case 5 -> {
-                context.runMenu(SettingMenu.class);
-                isStop = false;
-            }
-            default -> {
-                System.out.println("by by");
 
-            }
-        }
-        return isStop;
+    @Override
+    public boolean runSelectedMenu() {
+        String userInput = getUserInput("Insert your input");
+        return runSelectedMenu(userInput);
     }
 }
