@@ -36,8 +36,8 @@ public class Main {
         context.putMenu(SignInMenu.class);
         context.putMenu(SignOutMenu.class);
         context.putMenu(SignUpMenu.class);
-
         context.runtMenu(MainMenu.class);
+
     }
 
 

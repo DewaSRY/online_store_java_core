@@ -1,9 +1,6 @@
 package org.sdewa.menues;
 
-import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
-import org.sdewa.entities.User;
-import org.sdewa.services.UserManagement;
 import org.sdewa.services.impl.UserManagementServices;
 
 public class CustomerListMenu implements Menu {

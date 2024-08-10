@@ -1,19 +1,15 @@
 package org.sdewa.menues;
 
-import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.Product;
 import org.sdewa.entities.User;
-import org.sdewa.services.AuthManagement;
-import org.sdewa.services.OrderManagement;
 import org.sdewa.services.impl.AuthManagementServices;
 import org.sdewa.services.impl.OrderManagementService;
 
 import java.util.List;
 
 public class MyOrderMenu implements Menu {
-
-
+    
     private AuthManagementServices authManagement;
     private OrderManagementService orderManagement;
 

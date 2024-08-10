@@ -17,7 +17,6 @@ public interface Menu {
         var sc = new Scanner(System.in);
         System.out.printf("%s : ", message);
         return sc.next();
-
     }
 
 
