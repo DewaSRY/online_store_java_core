@@ -4,6 +4,7 @@ package org.sdewa.menues;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.Product;
 import org.sdewa.entities.impl.OrderDto;
@@ -13,18 +14,25 @@ import org.sdewa.services.impl.ProductManagementService;
 
 
 public class ProductCatalogMenu implements Menu {
-    private ProductManagementService productManagement;
-    private OrderManagementService orderManagement;
-    private AuthManagementServices authManagement;
+    private final ProductManagementService productManagement;
+    private final OrderManagementService orderManagement;
+    private final AuthManagementServices authManagement;
 
+
+    public ProductCatalogMenu(Context context) {
+        this.productManagement = context.getService(ProductManagementService.class);
+        this.orderManagement = context.getService(OrderManagementService.class);
+        this.authManagement = context.getService(AuthManagementServices.class);
+    }
 
     @Override
-    public void printMenu() {
+    public String printMenu() {
         var productList = productManagement.getProducts();
-        System.out.println("This is lis of our product");
+        var productOption = new StringBuilder("This is lis of our product");
         for (int idx = 0; idx < productList.size(); idx++) {
-            System.out.printf("(%d) %s%n", idx, productList.get(idx));
+            productOption.append("(%d) %s%n".formatted(idx, productList.get(idx)));
         }
+        return productOption.toString();
     }
 
     @Override

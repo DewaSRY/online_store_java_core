@@ -31,9 +31,12 @@ public class AppContext implements Context {
         serviceStore.storeObject(service.getClass(), service);
     }
 
-    public Services getService(Class<? extends Services> service) {
-        return serviceStore.geObject(service).orElse(null);
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends Services> T getService(Class<? extends Services> service) {
+        return (T) serviceStore.geObject(service).orElse(null);
     }
+
 
     @Override
     public void putMenu(MenuGetter menuGetter) {
@@ -44,7 +47,10 @@ public class AppContext implements Context {
     @Override
     public void runMenu(Class<? extends Menu> menu) {
         this.menuStore.geObject(menu).ifPresentOrElse(currentMenu -> {
-            currentMenu.printMenu();
+            System.out.printf("%s%n%s%n%s%n",
+                    "=".repeat(50),
+                    currentMenu.printMenu(),
+                    "=".repeat(50));
             currentMenu.run();
         }, () -> {
             System.out.printf("Menu with name %s not found%n",

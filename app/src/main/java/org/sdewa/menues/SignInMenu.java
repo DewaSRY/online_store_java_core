@@ -1,20 +1,28 @@
 package org.sdewa.menues;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.User;
 
+import org.sdewa.services.AuthManagement;
+import org.sdewa.services.UserManagement;
 import org.sdewa.services.impl.AuthManagementServices;
 import org.sdewa.services.impl.UserManagementServices;
 
 
 public class SignInMenu implements Menu {
 
-    private UserManagementServices userManagement;
-    private AuthManagementServices authManagement;
+    private final UserManagement userManagement;
+    private final AuthManagement authManagement;
+
+    public SignInMenu(Context context) {
+        this.userManagement = context.getService(UserManagementServices.class);
+        this.authManagement = context.getService(AuthManagementServices.class);
+    }
 
     @Override
-    public void printMenu() {
-        System.out.println("User Sing in menu");
+    public String printMenu() {
+        return printMenu("User Sing in Menu");
     }
 
     @Override

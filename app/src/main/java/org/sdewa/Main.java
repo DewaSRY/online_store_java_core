@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Arrays;
 
 
-import org.sdewa.AppContext.Context;
+import org.sdewa.AppContext.impl.AppContext;
 import org.sdewa.entities.Product;
 import org.sdewa.entities.impl.ProductDto;
 import org.sdewa.menues.*;
@@ -19,25 +19,27 @@ public class Main {
 
 
     public static void main(String[] args) {
-        var context = Context.getInstance();
+        var context = AppContext.getInstance();
         context.putServices(new OrderManagementService(new ArrayList<>()));
         context.putServices(new UserManagementServices(new ArrayList<>()));
         context.putServices(new ProductManagementService(getInitProduct()));
         context.putServices(new AuthManagementServices());
-        context.putMenu(AuthMenu.class);
-        context.putMenu(ChangeEmailMenu.class);
-        context.putMenu(ChangePasswordMenu.class);
-        context.putMenu(CheckoutMenu.class);
-        context.putMenu(CustomerListMenu.class);
-        context.putMenu(MainMenu.class);
-        context.putMenu(MyOrderMenu.class);
-        context.putMenu(ProductCatalogMenu.class);
-        context.putMenu(SettingMenu.class);
-        context.putMenu(SignInMenu.class);
-        context.putMenu(SignOutMenu.class);
-        context.putMenu(SignUpMenu.class);
-        context.runtMenu(MainMenu.class);
 
+        context.putMenu(AuthMenu::new);
+        context.putMenu(ChangeEmailMenu::new);
+        context.putMenu(ChangePasswordMenu::new);
+        context.putMenu(CheckoutMenu::new);
+        context.putMenu(CustomerListMenu::new);
+        context.putMenu(MainMenu::new);
+        context.putMenu(MyOrderMenu::new);
+        context.putMenu(ProductCatalogMenu::new);
+        context.putMenu(SettingMenu::new);
+        context.putMenu(SettingMenu::new);
+        context.putMenu(SignInMenu::new);
+        context.putMenu(SignOutMenu::new);
+        context.putMenu(SignUpMenu::new);
+
+        context.runMenu(MainMenu.class);
     }
 
 

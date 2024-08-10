@@ -5,18 +5,20 @@ import org.sdewa.AppContext.Menu;
 
 public class AuthMenu implements Menu {
 
-    private Context context;
+    private final Context context;
 
-    
+    public AuthMenu(Context context) {
+        this.context = context;
+    }
+
     @Override
-    public void printMenu() {
-        String menuOption = """
+    public String printMenu() {
+        return """
                 Auth Menu :
                 (0) Sing up menu
                 (1) Sing in menu
                 (2) Sing out menu
                 (b) back""";
-        System.out.println(menuOption);
     }
 
     @Override
@@ -27,17 +29,10 @@ public class AuthMenu implements Menu {
 
     private void runSelectedMenu(int inputIdx) {
         switch (inputIdx) {
-            case 0 -> {
-                context.runtMenu(SignUpMenu.class);
-            }
-            case 1 -> {
-                context.runtMenu(SignInMenu.class);
-            }
-            case 2 -> {
-                context.runtMenu(SignOutMenu.class);
-            }
+            case 0 -> context.runMenu(SignUpMenu.class);
+            case 1 -> context.runMenu(SignInMenu.class);
+            case 2 -> context.runMenu(SignOutMenu.class);
             default -> {
-
             }
         }
     }

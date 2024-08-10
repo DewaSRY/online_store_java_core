@@ -1,22 +1,25 @@
 package org.sdewa.menues;
 
+import com.sun.source.tree.BreakTree;
 import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 
 public class SettingMenu implements Menu {
 
 
-    private Context context;
+    private final Context context;
 
+    public SettingMenu(Context context) {
+        this.context = context;
+    }
 
     @Override
-    public void printMenu() {
-        String SettingOption = """
+    public String printMenu() {
+        return """
                 Setting Option
                 (0) Change email menu
                 (1) Change Password menu
                 (b) Back""";
-        System.out.println(SettingOption);
     }
 
     @Override
@@ -28,10 +31,10 @@ public class SettingMenu implements Menu {
     private void runSelectedMenu(int userInput) {
         switch (userInput) {
             case 0 -> {
-                context.runtMenu(ChangeEmailMenu.class);
+                context.runMenu(ChangeEmailMenu.class);
             }
             case 1 -> {
-                context.runtMenu(ChangePasswordMenu.class);
+                context.runMenu(ChangePasswordMenu.class);
             }
             default -> {
 

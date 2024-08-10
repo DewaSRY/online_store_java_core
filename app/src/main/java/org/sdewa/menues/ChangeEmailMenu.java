@@ -1,17 +1,23 @@
 package org.sdewa.menues;
 
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
+import org.sdewa.services.AuthManagement;
 import org.sdewa.services.impl.AuthManagementServices;
 
 public class ChangeEmailMenu implements Menu {
 
-    private AuthManagementServices authManagement;
+    private final AuthManagement authManagement;
+
+    public ChangeEmailMenu(Context context) {
+        this.authManagement = context.<AuthManagementServices>getService(AuthManagementServices.class);
+    }
 
 
     @Override
-    public void printMenu() {
-        System.out.println("***** CHANGE EMAIL *****");
+    public String printMenu() {
+        return printMenu("Change Email");
     }
 
     @Override
@@ -26,4 +32,6 @@ public class ChangeEmailMenu implements Menu {
             System.out.println("you are not login");
         }
     }
+
+
 }

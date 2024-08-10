@@ -1,17 +1,22 @@
 package org.sdewa.menues;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
 import org.sdewa.entities.User;
 import org.sdewa.entities.impl.UserDto;
+import org.sdewa.services.UserManagement;
 import org.sdewa.services.impl.UserManagementServices;
 
 public class SignUpMenu implements Menu {
-    private UserManagementServices userManagement;
+    private final UserManagement userManagement;
 
+    public SignUpMenu(Context context) {
+        this.userManagement = context.getService(UserManagementServices.class);
+    }
 
     @Override
-    public void printMenu() {
-        System.out.println("register menu");
+    public String printMenu() {
+        return printMenu("Register menu");
     }
 
     @Override
@@ -22,7 +27,6 @@ public class SignUpMenu implements Menu {
             System.out.println(registerResponse);
         }
 
-
     }
 
     private User createUser() {
@@ -30,10 +34,7 @@ public class SignUpMenu implements Menu {
         var firstNameInput = getUserInput("insert your first name");
         var lastNameInput = getUserInput("insert your last name");
         var passwordInput = getUserInput("insert your password");
-        var user = new UserDto(
-                firstNameInput, lastNameInput, passwordInput, emailInput
-        );
+        return new UserDto(firstNameInput, lastNameInput, passwordInput, emailInput);
 
-        return user;
     }
 }

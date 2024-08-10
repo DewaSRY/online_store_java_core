@@ -9,7 +9,14 @@ import java.util.regex.Pattern;
 public interface Menu {
     static Pattern numberPattern = Pattern.compile("[\\d]");
 
-    void printMenu();
+    String printMenu();
+
+    default String printMenu(String menuName) {
+        return "%s%s%s".formatted(
+                "*".repeat(15),
+                menuName,
+                "*".repeat(15));
+    }
 
     void run();
 

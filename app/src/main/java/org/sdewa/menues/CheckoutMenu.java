@@ -1,18 +1,25 @@
 package org.sdewa.menues;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
+import org.sdewa.services.AuthManagement;
+import org.sdewa.services.OrderManagement;
 import org.sdewa.services.impl.AuthManagementServices;
 import org.sdewa.services.impl.OrderManagementService;
 
 public class CheckoutMenu implements Menu {
 
-    private OrderManagementService orderManagement;
-    private AuthManagementServices authManagement;
+    private OrderManagement orderManagement;
+    private AuthManagement authManagement;
 
+    public CheckoutMenu(Context context) {
+        this.orderManagement = context.getService(OrderManagementService.class);
+        this.orderManagement = context.getService(AuthManagementServices.class);
+    }
 
     @Override
-    public void printMenu() {
-        System.out.println("list of your order");
+    public String printMenu() {
+        return printMenu("List product on your chart");
     }
 
     @Override

@@ -1,16 +1,21 @@
 package org.sdewa.menues;
 
+import org.sdewa.AppContext.Context;
 import org.sdewa.AppContext.Menu;
+import org.sdewa.services.AuthManagement;
 import org.sdewa.services.impl.AuthManagementServices;
 
 public class SignOutMenu implements Menu {
 
-    private AuthManagementServices authManagement;
+    private final AuthManagement authManagement;
 
+    public SignOutMenu(Context context) {
+        this.authManagement = context.getService(AuthManagementServices.class);
+    }
 
     @Override
-    public void printMenu() {
-        System.out.println("sign out menu");
+    public String printMenu() {
+        return printMenu("Sign out menu");
     }
 
     @Override
